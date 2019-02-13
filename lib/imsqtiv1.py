@@ -595,6 +595,9 @@ class InstructureHelperContainer(QTIMetadataContainer):
 
 	def SetAssessmentQuestionIdentiferref(self, ref):
 		self.AddMetaField("assessment_question_identifierref", ref)
+
+	def SetStandardGroupId(self, ref):
+		self.AddMetaField("standard_group_id", ref)
 	
 	def SetAssessmentType(self, type):
 		self.assessmentType = type
@@ -2943,6 +2946,15 @@ class AssessmentQuestionIdentiferref(CanvasBase):
 		if self.data:
 			self.container.SetAssessmentQuestionIdentiferref(self.data)
 
+class StandardGroupId(CanvasBase):
+	def __init__(self,name,attrs,parent):
+		CanvasBase.__init__(self, name, attrs, parent)
+
+	def CloseObject (self):
+		CanvasBase.CloseObject(self)
+		if self.data:
+			self.container.SetStandardGroupId(self.data)
+
 # bank_title
 # -----------
 #
@@ -3244,6 +3256,7 @@ MDFieldMap={
 	'question_type':QMDItemType,
 	'bank_title':BankTitle,
 	'assessment_question_identifierref':AssessmentQuestionIdentiferref,
+	'standard_group_id':StandardGroupId,
 
 	# These are custom WebCT (Blackboard Vista) fields
 	'wct_results_showfeedback':WCTShowFeedback,
